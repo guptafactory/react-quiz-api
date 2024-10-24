@@ -17,13 +17,13 @@ app.use(express.static("public"));
 
 // Middlewares
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: [process.env.FRONTEND_URL],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("<p>API working!</p>");
