@@ -3,6 +3,8 @@ import { config } from "dotenv";
 import path from "path";
 import fs from "fs";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
