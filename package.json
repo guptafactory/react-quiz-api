@@ -2,7 +2,6 @@
   "name": "10-react-iq-api",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -12,6 +11,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Himanshu",

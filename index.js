@@ -1,9 +1,10 @@
-import express from "express";
-import { config } from "dotenv";
-import path from "path";
-import fs from "fs";
-import cors from "cors";
-import dotenv from "dotenv";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const { config } = require("dotenv");
+
 dotenv.config();
 
 const app = express();
@@ -16,29 +17,23 @@ app.use(express.static("public"));
 
 // Middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.FRONTEND_URL],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
 
 app.get("/", (req, res) => {
   res.send("<p>API working!</p>");
 });
 
 app.get("/api/questions", (req, res) => {
-  fs.readFile("./public/data.json", "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "File reading error" });
+  const filePath = path.join(__dirname, "public", "data.json");
+  const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-    try {
-      const data = JSON.parse(data);
-      res.status(200).json(data);
-    } catch (parseErr) {
-      res.status(500).json({ error: "JSON parsing error" });
-    }
-  });
+  res.status(200).json(data);
 });
 
 app.listen(
